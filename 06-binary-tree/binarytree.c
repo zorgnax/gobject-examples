@@ -110,12 +110,15 @@ static void binary_tree_get_property (GObject    *obj,
     
     case PROP_HAS_PARENT:
         g_value_set_boolean(value, binary_tree_has_parent(self));
+        break;
 
     case PROP_HAS_LEFT:
         g_value_set_boolean(value, binary_tree_has_left(self));
+        break;
         
     case PROP_HAS_RIGHT:
         g_value_set_boolean(value, binary_tree_has_right(self));
+        break;
     
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID(obj, prop_id, pspec);
