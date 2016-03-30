@@ -1,12 +1,12 @@
-CFLAGS  = `pkg-config --cflags gobject-2.0` -g
-LDFLAGS = `pkg-config --libs gobject-2.0` -ltap
+CFLAGS  = `pkg-config --cflags gobject-2.0` -I. -g
+LDFLAGS = `pkg-config --libs gobject-2.0` -L. -ltap
 PROGS   = 01-media-from-book/media 02-point-inheritance/dopoints 03-order-of-callbacks/doorders 04-define-type-macros/dot 05-bank-account/robthebank 06-binary-tree/testbtree 07-currency-interfaces/launder
 BPROGS  = media dopoints doorders dot robthebank testbtree launder
 
 all: ${PROGS}
 
 clean:
-	rm -rvf ${PROGS} ${BPROGS}
+	rm -rvf ${PROGS} ${BPROGS} ${patsubst %, %.dSYM, ${PROGS}}
 
 01-media-from-book/media: 01-media-from-book/cleanable.c 01-media-from-book/cleanable.h 01-media-from-book/media.c
 	gcc ${CFLAGS} -o $@ 01-media-from-book/cleanable.c 01-media-from-book/media.c ${LDFLAGS}
@@ -35,6 +35,5 @@ clean:
 07-currency-interfaces/launder: 07-currency-interfaces/comparable.c 07-currency-interfaces/comparable.h 07-currency-interfaces/eq.c 07-currency-interfaces/eq.h 07-currency-interfaces/launder.c 07-currency-interfaces/printable.c 07-currency-interfaces/printable.h 07-currency-interfaces/uscurrency.c 07-currency-interfaces/uscurrency.h
 	gcc ${CFLAGS} -o $@ 07-currency-interfaces/comparable.c 07-currency-interfaces/eq.c 07-currency-interfaces/launder.c 07-currency-interfaces/printable.c 07-currency-interfaces/uscurrency.c ${LDFLAGS}
 	cp -v 07-currency-interfaces/launder .
-
 
 
